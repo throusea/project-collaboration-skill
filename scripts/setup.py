@@ -39,6 +39,13 @@ def install(project, source, consensus='docs/CollaborationConsensus.md', learnin
                 raise ValueError('Existing Skill differs; merge explicitly: ' + str(dest))
         else:
             pending[dest] = data
+    context = inside(project, 'docs/ContextAndIntent.md')
+    context_data = (source / 'templates/ContextAndIntent.md').read_bytes()
+    if context.exists():
+        if not context.is_file() or context.read_bytes() != context_data:
+            raise ValueError('Existing context rules differ; merge explicitly: ' + str(context))
+    else:
+        pending[context] = context_data
     rules = (source / 'templates/AGENTS.md').read_text(encoding='utf-8').strip()
     rules = rules.replace('{{consensus}}', Path(consensus).as_posix()).replace('{{learning}}', Path(learning).as_posix())
     block = BEGIN + '\n' + rules + '\n' + END

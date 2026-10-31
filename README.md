@@ -8,19 +8,19 @@
 
 > 请读取 https://github.com/throusea/project-collaboration-skill/blob/main/skills/project-collaboration-setup/SKILL.md ，按这个 Skill 为当前项目初始化协作机制。
 
-只需要这个初始化入口。助手负责获取两项核心 Skill、空共识模板并接入 AGENTS.md，不要求你手工下载文件。客户端会按自身权限要求确认文件或网络操作。
+只需要这个初始化入口。助手负责获取两项核心 Skill、语境识别文档、空共识模板并接入 AGENTS.md，不要求你手工下载文件。客户端会按自身权限要求确认文件或网络操作。
 
 如果使用 Codex 的 skill-installer，也可安装本仓库 `skills/project-collaboration-setup`，然后说“为当前项目初始化协作机制”。
 
 ## 内容
 
-- `skills/shared-understanding`：共同术语、理解反馈与精简共识维护；保留原始 Skill。
-- `skills/adaptive-teaching`：知识地图、实践反馈与学习节奏；保留原始 Skill。
+- `skills/shared-understanding`：共同术语、理解反馈与精简共识维护。
+- `skills/adaptive-teaching`：知识地图、实践反馈与学习节奏。
 - `skills/project-collaboration-setup`：无需预装依赖的初始化入口。
-- `templates`：可迁移的项目入口、空共识库、学习地图结构。
+- `templates`：可迁移的项目入口、语境与语义识别、空共识库、学习地图结构。
 - `examples`：压缩后的 UE 记录示例，仅参考，不安装。
 
-初始化产物：项目 `.agents/skills/` 下两个核心 Skill、AGENTS.md 协作入口、`docs/CollaborationConsensus.md`。学习记录在首次持续学习时创建于 `docs/learning/`；原始模板不自动建立课程。
+初始化产物：项目 `.agents/skills/` 下两个核心 Skill、AGENTS.md 协作入口、`docs/CollaborationConsensus.md` 和 `docs/ContextAndIntent.md`。学习记录在首次持续学习时创建于 `docs/learning/`；原始模板不自动建立课程。
 
 已有文件保留。重复运行不重复追加；同名 Skill 内容不同则停止等待合并。下载以一次解析到的提交为准，`.collaboration-kit-source.json` 记录来源，不自动追随远端升级。模板中的约定可以按项目需要调整。
 
@@ -37,3 +37,9 @@ python -m unittest discover -s project-collaboration-skill/tests
 自定义库路径使用 `--consensus notes/consensus.md --learning notes/learning`，路径均相对于目标项目。
 
 这套模板来源于实际的共识协作和 UE 学习实践；公开内容不包含原项目的研究记录或个人绝对路径。
+
+## 语境与语义识别
+
+每轮区分执行、平等讨论与教学，再判断询问、异议、理解反馈或授权。纠正先讨论，不自动认同；询问不自动切换教学。共识更新保留必要的助手理解修正，核对不强制新增条目。详细流程随初始化安装到 `docs/ContextAndIntent.md`。
+
+已有安装不会自动升级或覆盖定制文件；更新时对照新模板手动合并。安装测试验证文件保护与重复运行，不能代替真实对话效果测试。

@@ -27,6 +27,7 @@ class InstallTests(unittest.TestCase):
         self.assertEqual(self.run_install(), [])
         self.assertEqual(before, self.snapshot())
         self.assertFalse((self.root / 'docs/learning').exists())
+        self.assertEqual((SOURCE / 'templates/ContextAndIntent.md').read_bytes(), (self.root / 'docs/ContextAndIntent.md').read_bytes())
         for name in ('shared-understanding', 'adaptive-teaching'):
             self.assertEqual((SOURCE / 'skills' / name / 'SKILL.md').read_bytes(), (self.root / '.agents/skills' / name / 'SKILL.md').read_bytes())
 
@@ -44,6 +45,15 @@ class InstallTests(unittest.TestCase):
         p = self.root / '.agents/skills/adaptive-teaching/SKILL.md'
         p.parent.mkdir(parents=True)
         p.write_text('Custom teaching')
+        before = self.snapshot()
+        with self.assertRaises(ValueError):
+            self.run_install()
+        self.assertEqual(before, self.snapshot())
+
+    def test_custom_context_no_mutation(self):
+        p = self.root / 'docs/ContextAndIntent.md'
+        p.parent.mkdir(parents=True)
+        p.write_text('Custom context rules', encoding='utf-8')
         before = self.snapshot()
         with self.assertRaises(ValueError):
             self.run_install()
